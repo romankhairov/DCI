@@ -1,0 +1,35 @@
+{
+	"payload":
+	{
+		"levelName": "room1",
+		"hideAllLevels": false,
+		"hideLastLevel": false,
+		"clickable": false,
+		"levelsToHide": [],
+		"location":
+		{
+			"x": 0,
+			"y": 6.9521232070609348e-310,
+			"z": 0
+		},
+		"rotation":
+		{
+			"pitch": 6.9520742839342493e-310,
+			"yaw": 3.5572726500569751e-322,
+			"roll": -3.5840849233451444e-180
+		},
+		"optionalLevelName": "",
+		"levelType": [],
+		"levelPak":
+		{
+			"assetName": "DCI/Levels/room1",
+			"pakFilePath": "room1.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"type": "LEVEL",
+		"unrealVersion": "V_5"
+	},
+	"command": "loadLevel",
+	"name": "room1"
+}

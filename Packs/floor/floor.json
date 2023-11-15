@@ -1,0 +1,67 @@
+{
+	"data":
+	{
+		"title": "floor",
+		"sku": "floor",
+		"pakFilePath": "floor.pak",
+		"id": "",
+		"previewPath": "",
+		"property":
+		{
+			"variants": [
+				{
+					"label": "DCI/Materials/Floor/MI_0648V",
+					"name": "DCI/Materials/Floor/MI_0648V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Floor/MI_0896V",
+					"name": "DCI/Materials/Floor/MI_0896V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Floor/MI_0993V",
+					"name": "DCI/Materials/Floor/MI_0993V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Floor/MI_1447V",
+					"name": "DCI/Materials/Floor/MI_1447V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Floor/MI_1508V",
+					"name": "DCI/Materials/Floor/MI_1508V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Floor/MI_1676V",
+					"name": "DCI/Materials/Floor/MI_1676V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Floor/MI_4110V",
+					"name": "DCI/Materials/Floor/MI_4110V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Floor/MI_4372V",
+					"name": "DCI/Materials/Floor/MI_4372V",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				}
+			]
+		},
+		"status": "ACTIVE",
+		"isUnreal": true,
+		"unrealType": "MM",
+		"__typename": "Asset"
+	}
+}

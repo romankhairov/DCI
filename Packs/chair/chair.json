@@ -1,0 +1,193 @@
+{
+	"data":
+	{
+		"title": "chair",
+		"sku": "chair",
+		"pakFilePath": "chair.pak",
+		"id": "",
+		"previewPath": "",
+		"property":
+		{
+			"variants": [
+				{
+					"label": "DCI/Materials/Chair/MI_apricot",
+					"name": "DCI/Materials/Chair/MI_apricot",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_arctic",
+					"name": "DCI/Materials/Chair/MI_arctic",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_baltic",
+					"name": "DCI/Materials/Chair/MI_baltic",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_bayou",
+					"name": "DCI/Materials/Chair/MI_bayou",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_blueberry",
+					"name": "DCI/Materials/Chair/MI_blueberry",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_campfire",
+					"name": "DCI/Materials/Chair/MI_campfire",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_charcoal",
+					"name": "DCI/Materials/Chair/MI_charcoal",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_citrus",
+					"name": "DCI/Materials/Chair/MI_citrus",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_diplomat_blue",
+					"name": "DCI/Materials/Chair/MI_diplomat_blue",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_dove_grey",
+					"name": "DCI/Materials/Chair/MI_dove_grey",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_eucalyptus",
+					"name": "DCI/Materials/Chair/MI_eucalyptus",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_mica",
+					"name": "DCI/Materials/Chair/MI_mica",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_midnight",
+					"name": "DCI/Materials/Chair/MI_midnight",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_nauga_soft_black_satin",
+					"name": "DCI/Materials/Chair/MI_nauga_soft_black_satin",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_nauga_soft_cabernet",
+					"name": "DCI/Materials/Chair/MI_nauga_soft_cabernet",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_nauga_soft_cocoa",
+					"name": "DCI/Materials/Chair/MI_nauga_soft_cocoa",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_nauga_soft_deep_sea",
+					"name": "DCI/Materials/Chair/MI_nauga_soft_deep_sea",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_nauga_soft_feather",
+					"name": "DCI/Materials/Chair/MI_nauga_soft_feather",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_nauga_soft_lake_louise",
+					"name": "DCI/Materials/Chair/MI_nauga_soft_lake_louise",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_oz",
+					"name": "DCI/Materials/Chair/MI_oz",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_papyrus",
+					"name": "DCI/Materials/Chair/MI_papyrus",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_parrot",
+					"name": "DCI/Materials/Chair/MI_parrot",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_pewter",
+					"name": "DCI/Materials/Chair/MI_pewter",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_rain_dance",
+					"name": "DCI/Materials/Chair/MI_rain_dance",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_raven_wing",
+					"name": "DCI/Materials/Chair/MI_raven_wing",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_silver_pearl",
+					"name": "DCI/Materials/Chair/MI_silver_pearl",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_sky",
+					"name": "DCI/Materials/Chair/MI_sky",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_st_john",
+					"name": "DCI/Materials/Chair/MI_st_john",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Chair/MI_tin_man",
+					"name": "DCI/Materials/Chair/MI_tin_man",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				}
+			]
+		},
+		"status": "ACTIVE",
+		"isUnreal": true,
+		"unrealType": "MM",
+		"__typename": "Asset"
+	}
+}

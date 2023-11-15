@@ -1,0 +1,70 @@
+{
+	"payload":
+	{
+		"productName": "BP_LC5050",
+		"meshPak":
+		{
+			"initialState":
+			{
+				"meshName": "DCI/Meshes/BP_LC5050",
+				"transform":
+				{
+					"rotation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0,
+						"w": 1
+					},
+					"translation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"scale3D":
+					{
+						"x": 1,
+						"y": 1,
+						"z": 1
+					}
+				},
+				"animations": [],
+				"materials": [],
+				"slots": [
+					"Steel",
+					"Gray_bump_paint",
+					"Plastic_trans",
+					"Gray_paint",
+					"Mirror",
+					"Black_plastic",
+					"White_paint",
+					"Lamp_buttons_01",
+					"Lamp_buttons_02",
+					"Material #35",
+					"Blue emissive"
+				],
+				"morphs": []
+			},
+			"pakFilePath": "BP_LC5050.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"animationsPak":
+		{
+			"pakFilePath": "BP_LC5050.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"materialPak":
+		{
+			"pakFilePath": "",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"type": "PRODUCT",
+		"unrealVersion": "V_5"
+	},
+	"command": "selectProduct",
+	"name": "BP_LC5050"
+}

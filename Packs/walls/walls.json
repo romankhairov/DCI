@@ -1,0 +1,109 @@
+{
+	"data":
+	{
+		"title": "walls",
+		"sku": "walls",
+		"pakFilePath": "walls.pak",
+		"id": "",
+		"previewPath": "",
+		"property":
+		{
+			"variants": [
+				{
+					"label": "DCI/Materials/Wall/M_fon",
+					"name": "DCI/Materials/Wall/M_fon",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/M_walls",
+					"name": "DCI/Materials/Wall/M_walls",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_Pic_01",
+					"name": "DCI/Materials/Wall/MI_Pic_01",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_Pic_02",
+					"name": "DCI/Materials/Wall/MI_Pic_02",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_6211",
+					"name": "DCI/Materials/Wall/MI_SW_6211",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_6239",
+					"name": "DCI/Materials/Wall/MI_SW_6239",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_6241",
+					"name": "DCI/Materials/Wall/MI_SW_6241",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_6250",
+					"name": "DCI/Materials/Wall/MI_SW_6250",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_6254",
+					"name": "DCI/Materials/Wall/MI_SW_6254",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_6686",
+					"name": "DCI/Materials/Wall/MI_SW_6686",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_7019",
+					"name": "DCI/Materials/Wall/MI_SW_7019",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_7036",
+					"name": "DCI/Materials/Wall/MI_SW_7036",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_7656",
+					"name": "DCI/Materials/Wall/MI_SW_7656",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_SW_9541",
+					"name": "DCI/Materials/Wall/MI_SW_9541",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				},
+				{
+					"label": "DCI/Materials/Wall/MI_wall",
+					"name": "DCI/Materials/Wall/MI_wall",
+					"hex": "rgb(0,0,0)",
+					"_typename": "AssetPropertyVariant"
+				}
+			]
+		},
+		"status": "ACTIVE",
+		"isUnreal": true,
+		"unrealType": "MM",
+		"__typename": "Asset"
+	}
+}

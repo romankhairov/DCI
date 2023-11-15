@@ -1,0 +1,80 @@
+{
+	"payload":
+	{
+		"productName": "BP_CR5500",
+		"meshPak":
+		{
+			"initialState":
+			{
+				"meshName": "DCI/Meshes/BP_CR5500",
+				"transform":
+				{
+					"rotation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0,
+						"w": 1
+					},
+					"translation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"scale3D":
+					{
+						"x": 1,
+						"y": 1,
+						"z": 1
+					}
+				},
+				"animations": [],
+				"materials": [],
+				"slots": [
+					"Material #118",
+					"surfaces",
+					"lowerCabinet",
+					"upperCabinet",
+					"Glass_bump",
+					"Facade_in",
+					"Steel_handles",
+					"Plastic_trans",
+					"Metall_rought",
+					"White_plastic",
+					"Black_plastic",
+					"Screen_12",
+					"Steel",
+					"Monitor screen",
+					"Screen_12_01",
+					"Gloves",
+					"cotton",
+					"LED light",
+					"Glass_in",
+					"Glass_in_green",
+					"accent"
+				],
+				"morphs": []
+			},
+			"pakFilePath": "BP_CR5500.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"animationsPak":
+		{
+			"pakFilePath": "BP_CR5500.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"materialPak":
+		{
+			"pakFilePath": "",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"type": "PRODUCT",
+		"unrealVersion": "V_5"
+	},
+	"command": "selectProduct",
+	"name": "BP_CR5500"
+}

@@ -1,0 +1,66 @@
+{
+	"payload":
+	{
+		"productName": "SM_CA5003",
+		"meshPak":
+		{
+			"initialState":
+			{
+				"meshName": "DCI/Meshes/SM_CA5003",
+				"transform":
+				{
+					"rotation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0,
+						"w": 1
+					},
+					"translation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"scale3D":
+					{
+						"x": 1,
+						"y": 1,
+						"z": 1
+					}
+				},
+				"animations": [],
+				"materials": [],
+				"slots": [
+					"Gray_metal",
+					"Steel_brushed",
+					"Steel_handles",
+					"surfaces",
+					"lowerCabinet",
+					"Facade_in",
+					"Steel"
+				],
+				"morphs": []
+			},
+			"pakFilePath": "SM_CA5003.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"animationsPak":
+		{
+			"pakFilePath": "",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"materialPak":
+		{
+			"pakFilePath": "",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"type": "PRODUCT",
+		"unrealVersion": "V_5"
+	},
+	"command": "selectProduct",
+	"name": "SM_CA5003"
+}

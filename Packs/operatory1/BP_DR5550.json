@@ -1,0 +1,80 @@
+{
+	"payload":
+	{
+		"productName": "BP_DR5550",
+		"meshPak":
+		{
+			"initialState":
+			{
+				"meshName": "DCI/Meshes/BP_DR5550",
+				"transform":
+				{
+					"rotation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0,
+						"w": 1
+					},
+					"translation":
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					"scale3D":
+					{
+						"x": 1,
+						"y": 1,
+						"z": 1
+					}
+				},
+				"animations": [],
+				"materials": [],
+				"slots": [
+					"White_paint",
+					"surfaces",
+					"Light_gray_paint",
+					"Allum_brushed",
+					"Steel",
+					"Gray_plastic",
+					"Rubber",
+					"White_plastic_bottle",
+					"Letters_brown",
+					"Rubber_pipes",
+					"White_paint_ncl1_1",
+					"DS_buttons",
+					"Touchpad",
+					"Tool_Metallic_Grey_1",
+					"Tool_Metallic_Grey_2",
+					"Tool_Metallic_Red_1",
+					"Tool_Metallic_Grey_3",
+					"Tool_Metallic_Grey_4",
+					"Tool_Metallic_Grey_5",
+					"Tool_Metallic_Grey_6",
+					"Plas"
+				],
+				"morphs": []
+			},
+			"pakFilePath": "BP_DR5550.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"animationsPak":
+		{
+			"pakFilePath": "BP_DR5550.pak",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"materialPak":
+		{
+			"pakFilePath": "",
+			"name": "PakE",
+			"mountPath": "../../../PakExport/Plugins/"
+		},
+		"type": "PRODUCT",
+		"unrealVersion": "V_5"
+	},
+	"command": "selectProduct",
+	"name": "BP_DR5550"
+}
