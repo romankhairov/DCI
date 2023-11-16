@@ -108,11 +108,12 @@ public:
 	UPROPERTY(BlueprintReadWrite) bool hideLastLevel = false;
 	UPROPERTY(BlueprintReadWrite) bool clickable = false;
 	UPROPERTY(BlueprintReadWrite) TArray<FString> levelsToHide;
-	UPROPERTY(BlueprintReadWrite) FVector location;
-	UPROPERTY(BlueprintReadWrite) FRotator rotation;
+	UPROPERTY(BlueprintReadWrite) FVector location = FVector(0,0,0);
+	UPROPERTY(BlueprintReadWrite) FRotator rotation = FRotator(0,0,0);
 	UPROPERTY(BlueprintReadWrite) FString optionalLevelName;
 	UPROPERTY(BlueprintReadWrite) TArray<FString> levelType;
 	UPROPERTY(BlueprintReadWrite) FLevelPakPathData levelPak;
+	UPROPERTY(BlueprintReadWrite) TArray<FString> slots{};
 };
 
 USTRUCT()
@@ -201,7 +202,6 @@ public:
 	
 protected:
 	UPROPERTY() FString hex { "rgb(0,0,0)" };
-	UPROPERTY() FString _typename{"AssetPropertyVariant"};
 };
 
 USTRUCT()
@@ -223,11 +223,7 @@ public:
 	UPROPERTY() FString id;
 	UPROPERTY() FString previewPath;
 	UPROPERTY() FMaterialPropertyData property;
-protected:
-	UPROPERTY() FString status{"ACTIVE"};
-	UPROPERTY() bool isUnreal = true;
-	UPROPERTY() FString unrealType{"MM"};
-	UPROPERTY() FString __typename{"Asset"};
+	UPROPERTY() EPakType type{EPakType::MATERIAL};
 };
 
 USTRUCT()
@@ -247,8 +243,8 @@ public:
 	{
 		type = EPakType::CAMERA;
 	}
-	UPROPERTY(BlueprintReadWrite) FVector location;
-	UPROPERTY(BlueprintReadWrite) FRotator rotation;
+	UPROPERTY(BlueprintReadWrite) FVector location = FVector(0,0,0);
+	UPROPERTY(BlueprintReadWrite) FRotator rotation = FRotator(0,0,0);
 	UPROPERTY(BlueprintReadWrite) FString object;
 	UPROPERTY(BlueprintReadWrite) float armLength = 0.f;
 	UPROPERTY(BlueprintReadWrite) float focalLength = 0.f;

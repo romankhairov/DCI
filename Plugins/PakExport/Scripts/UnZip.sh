@@ -7,3 +7,5 @@ $SCRIPTPATH/Cleanup.sh
 UtilsDir="$SCRIPTPATH/../Utils"
 
 "$UtilsDir/7-Zip-Mac/7zz" x "$UtilsDir/PakExport.7z" -o"$UtilsDir"
+
+cp -f "$SCRIPTPATH/../../../Config/DefaultEngine.ini" "$UtilsDir/PakExport/Config/DefaultEngine.ini"
