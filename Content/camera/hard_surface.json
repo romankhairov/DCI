@@ -24,7 +24,7 @@
 						"maxYaw": 80.0,
 						"minPitch": -61.8,
 						"maxPitch": 30.0,
-						"minZoom": -120,
+						"minZoom": -60,
 						"maxZoom": 0
 					}
 				},
