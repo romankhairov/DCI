@@ -9,6 +9,7 @@
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "JsonObjectConverter.h"
 #include "CineCameraActor.h"
+#include "LevelSequence.h"
 #include "Engine/BlueprintGeneratedClass.h"
 #include "Engine/SimpleConstructionScript.h"
 #include "Engine/SCS_Node.h"
@@ -38,9 +39,10 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FString>& InA
 	GenerateJsonsForAssets(Assets, DestinationFile);
 }
 
-void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& InAssets, const FString& DestinationFile, bool MaterialsPakRequested/* = false*/, bool CamerasPakRequested/* = false*/)
+void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& InAssets, const FString& DestinationFile, bool MaterialsPakRequested/* = false*/, bool CamerasPakRequested/* = false*/, bool LevelSequencePakRequested/* = false*/)
 {
 	TArray<const FAssetData*> SelectedMaterialsAssets;
+	TArray<FAssetPakJson> LevelSequencePakDatas;
 
 	const auto DestinationDir = FPaths::GetPath(DestinationFile);
 	const auto PakFilePath = FPaths::GetCleanFilename(DestinationFile); //TODO: make relative path instead simple filename
@@ -55,7 +57,7 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 		{
 			if (!MaterialsPakRequested)
 			{
-				FMaterialPakData MaterialPakData;
+				FSetMaterialPayloadJson MaterialPakData;
 				MaterialPakData.materialName = Name;
 				MaterialPakData.materialPak.pakFilePath = PakFilePath;
 				MaterialPakData.materialPak.assetName = AssetName;
@@ -81,7 +83,7 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 		{
 			if (!CamerasPakRequested)
 			{
-				FLevelPakData LevelPakData;
+				FLoadLevelPayloadJson LevelPakData;
 				LevelPakData.levelName = Name;
 				LevelPakData.levelPak.pakFilePath = PakFilePath;
 				LevelPakData.levelPak.assetName = AssetName;
@@ -104,15 +106,10 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 						});
 					}
 				}
-				
-				FLevelCommandData LevelCommandData;
-				LevelCommandData.command = "loadLevel";
-				LevelCommandData.name = Name;
-				LevelCommandData.payload = LevelPakData;
 
 				//save JSON to file near pak file
 				FString JsonString;
-				if (FJsonObjectConverter::UStructToJsonObjectString(LevelCommandData, JsonString))
+				if (FJsonObjectConverter::UStructToJsonObjectString(LevelPakData, JsonString))
 				{
 					FFileHelper::SaveStringToFile(JsonString, *(DestinationDir + FString("/") + Name + ".json"));
 				}
@@ -131,25 +128,15 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 				for (const auto Actor : Actors)
 					if (const auto CameraActor = Cast<ACineCameraActor>(Actor))
 					{
-						/*FFileHelper::SaveArrayToFile(Bytes, *(DestinationDir + FString("/")
-						+ SelectedPakFileNameBase + "_" + Name + "_" + Camera->GetName() + ".obj"));*/
-
-						const auto CameraName = Name + "_" + CameraActor->GetName();
-						FCameraCommandData CameraCommandData;
-						CameraCommandData.command = "applyCameraPreset";
-						CameraCommandData.name = CameraName;
-						CameraCommandData.data = GenerateCameraData(CameraActor);
-
 						FString JsonString;
-						if (FJsonObjectConverter::UStructToJsonObjectString(CameraCommandData, JsonString))
+						if (FJsonObjectConverter::UStructToJsonObjectString(GenerateCameraData(CameraActor), JsonString))
 						{
 							FFileHelper::SaveStringToFile(JsonString, *(DestinationDir + FString("/")
-								+ SelectedPakFileNameBase + "_" + CameraName + ".json"));
+								+ SelectedPakFileNameBase + "_" + Name + "_" + CameraActor->GetName() + ".json"));
 						}
 						else
 						{
 							UE_LOG(LogPakExportRuntime, Error, TEXT("Generate cameras pak json failed!"));
-							continue;
 						}
 					}
 			}
@@ -159,7 +146,7 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 			|| Asset->IsA(UBlueprint::StaticClass())
 			|| Asset->IsA(USkeletalMesh::StaticClass()))
 		{
-			FProductPakData ProductPakData;
+			FSelectProductPayloadJson ProductPakData;
 			ProductPakData.productName = Name;
 			ProductPakData.meshPak.pakFilePath = PakFilePath;
 			ProductPakData.meshPak.initialState.meshName = AssetName;
@@ -178,7 +165,7 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 			}
 				
 			//collect animations
-			FPakPathData AnimationsPakPathData;
+			FPakJson AnimationsPakPathData;
 			AnimationsPakPathData.pakFilePath = PakFilePath;
 			if (const auto Blueprint = Cast<UBlueprint>(Asset))
 			{
@@ -210,13 +197,8 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 				ProductPakData.animationsPak = AnimationsPakPathData;
 			}
 
-			FProductCommandData ProductCommandData;
-			ProductCommandData.command = "selectProduct";
-			ProductCommandData.name = Name;
-			ProductCommandData.payload = ProductPakData;
-
 			FString JsonString;
-			if (FJsonObjectConverter::UStructToJsonObjectString(ProductCommandData, JsonString))
+			if (FJsonObjectConverter::UStructToJsonObjectString(ProductPakData, JsonString))
 			{
 				FFileHelper::SaveStringToFile(JsonString, *(DestinationDir + FString("/") + Name + ".json"));
 			}
@@ -226,12 +208,57 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 				continue;
 			}
 		}
+		//LevelSequence
+		else if (Asset->IsA(ULevelSequence::StaticClass()))
+		{
+			FAssetPakJson LevelSequencePakData;
+			LevelSequencePakData.pakFilePath = PakFilePath;
+			LevelSequencePakData.assetName = AssetName;
+			
+			if (!LevelSequencePakRequested)
+			{
+				FInitSequencePayloadJson InitSequencePayloadJson;
+				InitSequencePayloadJson.paks.Add(LevelSequencePakData);
+				
+				FString JsonString;
+				if (FJsonObjectConverter::UStructToJsonObjectString(InitSequencePayloadJson, JsonString))
+				{
+					FFileHelper::SaveStringToFile(JsonString, *(DestinationDir + FString("/") + Name + ".json"));
+				}
+				else
+				{
+					UE_LOG(LogPakExportRuntime, Error, TEXT("Generate Level Sequence pak json failed!"));
+					continue;
+				}
+			}
+			else
+			{
+				LevelSequencePakDatas.Emplace(MoveTemp(LevelSequencePakData));
+			}
+		}
 		else
 		{
 			UE_LOG(LogPakExportRuntime, Error, TEXT("Unknow asset type for pak null!"));
 		}
 	}
 
+	//make level sequence pak JSON
+	if (LevelSequencePakRequested)
+	{
+		FInitSequencePayloadJson InitSequencePayloadJson;
+		InitSequencePayloadJson.paks = MoveTemp(LevelSequencePakDatas);
+
+		FString JsonString;
+		if (FJsonObjectConverter::UStructToJsonObjectString(InitSequencePayloadJson, JsonString))
+		{
+			FFileHelper::SaveStringToFile(JsonString, *(DestinationDir + FString("/") + SelectedPakFileNameBase + ".json"));
+		}
+		else
+		{
+			UE_LOG(LogPakExportRuntime, Error, TEXT("Generate Level Sequences pak json failed!"));
+		}
+	}
+	
 	//make material pak JSON
 	if (MaterialsPakRequested)
 	{
@@ -263,9 +290,9 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 	}
 }
 
-FCameraData UPakExportUtilityRuntime::GenerateCameraData(AActor* CameraActor)
+FApplyCameraPresetPayloadJson UPakExportUtilityRuntime::GenerateCameraData(AActor* CameraActor)
 {
-	FCameraData CameraData;
+	FApplyCameraPresetPayloadJson CameraData;
 	const auto CopyCameraActor = DuplicateObject<AActor>(CameraActor, CameraActor->GetOuter());
 	const auto OrigCameraComp = CameraActor->FindComponentByClass<UCineCameraComponent>();
 

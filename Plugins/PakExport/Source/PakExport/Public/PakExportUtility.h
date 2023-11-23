@@ -28,14 +28,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "PakExport") static void Export2Paks();
 	UFUNCTION(BlueprintCallable, Category = "PakExport") static void Export2MaterialsPak();
 	UFUNCTION(BlueprintCallable, Category = "PakExport") static void Export2CamerasPak();
-	UFUNCTION(BlueprintCallable, Category = "PakExport") static void MakeBunchFromMorphs(FString SourcePakageName, FString MaterialPakageName, FString EdgeMaterialPakageName, FString SliceMaterialPakageName, FString SubstrateMaterialPakageName, FString DestinationPakageName, TArray<FMorphTargetData> MorphTargets, FVector2D Size, float Gap, FString Styling, bool OnlyCut);
+	UFUNCTION(BlueprintCallable, Category = "PakExport") static void Export2LevelSequencePak();
+	UFUNCTION(BlueprintCallable, Category = "PakExport")
+	static void MakeBunchFromMorphs(FString SourcePakageName, FString MaterialPakageName,
+	                                FString SliceMaterialPakageName, FString SubstrateMaterialPakageName,
+	                                FString DestinationPakageName, TArray<FMorphTargetData> MorphTargets,
+	                                FVector2D Size, float Gap, FString Styling, bool OnlyCut);
 
 private:
 	static bool SetStarted(bool Val);
 	static bool Prepare();
 	static bool MigratePackages(const TArray<FAssetData>& Assets = {});
 	static void MigratePackages_ReportConfirmed(TSharedPtr<TArray<ReportPackageData>> PackageDataToMigrate);
-	static bool CookPak(const FString& DestinationFile = {});
+	static bool CookPak(const FString& DestinationFile, const FString& CustomFileName);
 	static bool RunBat(const FString& BatFileAndParams);
 	static void EnableSimpleCollisions(const TArray<FAssetData>& Assets);
 	static void RecursiveGetDependencies(const FName& PackageName, TSet<FName>& AllDependencies, TSet<FName>& Dependencies, const FString& OriginalRoot);
@@ -43,7 +48,6 @@ private:
 	static void ConvertActorsToStaticMesh(const TArray<AActor*> InActors, FString DestinationPakageName);
 	static void ProceduralToStaticMesh(UProceduralMeshComponent* ProceduralMeshComponent, const FString& InPackageName);
 	static void SetAllowCPUAccess(UObject* WorldContextObject, UStaticMesh* StaticMesh);
-	static TArray<UMaterialInterface*> GetBunchMaterials(const FString& MaterialPackageName);
 	static void Export2Pak_Internal(const TArray<FAssetData>& Assets = {}, const FString& DestinationDir = {});
 };
 

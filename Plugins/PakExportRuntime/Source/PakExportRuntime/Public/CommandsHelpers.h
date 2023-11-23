@@ -5,7 +5,7 @@
 
 ///A vector in 2-D space composed of components (X, Y) with floating point precision.
 USTRUCT()
-struct FVector2DJson
+struct PAKEXPORTRUNTIME_API FVector2DJson
 {
 	GENERATED_BODY()
 public:
@@ -18,11 +18,15 @@ public:
 
 ///Implements a container for rotation information.
 ///All rotation values are stored in degrees.
-USTRUCT()
-struct FRotatorJson
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FRotatorJson
 {
 	GENERATED_BODY()
 public:
+	FRotatorJson();
+	FRotatorJson(const FRotator& Rotator);
+	FRotatorJson(FRotator&& Rotator);
+	
 	///Rotation around the right axis (around Y axis), Looking up and down (0=Straight Ahead, +Up, -Down)
 	UPROPERTY() float Pitch = 0.0f;
 
@@ -34,8 +38,8 @@ public:
 };
 
 ///A vector in 3-D space composed of components (X, Y, Z) with floating point precision.
-USTRUCT()
-struct FVectorJson
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FVectorJson
 {
 	GENERATED_BODY()
 public:
@@ -55,10 +59,14 @@ public:
 
 ///Transform composed of Scale, Rotation (as a rotator), and Translation.
 USTRUCT()
-struct FTransformJson
+struct PAKEXPORTRUNTIME_API FTransformJson
 {
 	GENERATED_BODY()
 public:
+	FTransformJson();
+	FTransformJson(const FTransform& Transform);
+	FTransformJson(FTransform&& Transform);
+	
 	///Rotation of this transformation, as a rotator
 	UPROPERTY() FRotatorJson rotation;
 	
@@ -71,7 +79,7 @@ public:
 
 //Scalar material parameter
 USTRUCT()
-struct FScalarJson
+struct PAKEXPORTRUNTIME_API FScalarJson
 {
 	GENERATED_BODY()
 public:
@@ -84,7 +92,7 @@ public:
 
 ///Material texture
 USTRUCT()
-struct FTextureJson
+struct PAKEXPORTRUNTIME_API FTextureJson
 {
 	GENERATED_BODY()
 public:
@@ -118,8 +126,8 @@ public:
 
 
 ///Material
-USTRUCT()
-struct FMaterialJson
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FMaterialJson
 {
 	GENERATED_BODY()
 public:
@@ -147,7 +155,7 @@ public:
 
 ///Mesh initial state
 USTRUCT()
-struct FInitialStateJson
+struct PAKEXPORTRUNTIME_API FInitialStateJson
 {
 	GENERATED_BODY()
 public:
@@ -159,11 +167,20 @@ public:
 
 	///list of materials applying to product
 	UPROPERTY() TArray<FMaterialJson> materials;
+
+	///Product animations
+	UPROPERTY() TArray<FString> animations;
+
+	///Materials slots
+	UPROPERTY() TArray<FString> slots;
+
+	///Founded in product morphs
+	UPROPERTY() TArray<FString> morphs;
 };
 
 ///Object describes path to pak/use file
-USTRUCT()
-struct FPakJson
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FPakJson
 {
 	GENERATED_BODY()
 public:
@@ -182,10 +199,121 @@ public:
 
 ///Mesh pak file
 USTRUCT()
-struct FMeshPakJson : public FPakJson
+struct PAKEXPORTRUNTIME_API FMeshPakJson : public FPakJson
 {
 	GENERATED_BODY()
 public:
 	///Mesh initial state
 	UPROPERTY() FInitialStateJson initialState;
+};
+
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FAssetPakJson : public FPakJson
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FString assetName;
+};
+
+
+//Payloads
+
+UENUM()
+enum class EAssetType : uint8
+{
+	NONE,
+	PRODUCT,
+	MATERIAL,
+	LEVEL,
+	CAMERA,
+	LEVEL_SEQUENCE
+};
+
+USTRUCT()
+struct PAKEXPORTRUNTIME_API FPayloadJson
+{
+	GENERATED_BODY()
+public:
+	FPayloadJson();
+	
+protected:
+	UPROPERTY() EAssetType type = EAssetType::NONE;
+	UPROPERTY() FString unrealVersion;
+};
+
+///Select product command payload
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FSelectProductPayloadJson : public FPayloadJson
+{
+	GENERATED_BODY()
+public:
+	FSelectProductPayloadJson();
+	
+	///Global(static) product ID in scene (not per instance)
+	UPROPERTY() FString productName;
+
+	///Mesh pak file
+	UPROPERTY() FMeshPakJson meshPak;
+
+	///Material pak file
+	UPROPERTY() FPakJson materialPak;
+
+	///Animations pak file
+	UPROPERTY() FPakJson animationsPak;
+};
+
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FLoadLevelPayloadJson : public FPayloadJson
+{
+	GENERATED_BODY()
+public:
+	FLoadLevelPayloadJson();
+	
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FString levelName;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) bool hideAllLevels = false;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) bool hideLastLevel = false;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) bool clickable = false;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) TArray<FString> levelsToHide;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FVectorJson location;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FRotatorJson rotation;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FString optionalLevelName;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) TArray<FString> levelType;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FAssetPakJson levelPak;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) TArray<FString> slots{};
+};
+
+USTRUCT()
+struct PAKEXPORTRUNTIME_API FSetMaterialPayloadJson : public FPayloadJson
+{
+	GENERATED_BODY()
+public:
+	FSetMaterialPayloadJson();
+	
+	UPROPERTY() FString materialName;
+	UPROPERTY() FAssetPakJson materialPak;
+};
+
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FInitSequencePayloadJson : public FPayloadJson
+{
+	GENERATED_BODY()
+public:
+	FInitSequencePayloadJson();
+
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) TArray<FAssetPakJson> paks;
+};
+
+USTRUCT(BlueprintType)
+struct PAKEXPORTRUNTIME_API FApplyCameraPresetPayloadJson : public FPayloadJson
+{
+	GENERATED_BODY()
+public:
+	FApplyCameraPresetPayloadJson();
+	
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FVector location;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FRotator rotation;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) FString object;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) float armLength = 0.f;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) float focalLength = 0.f;
+	UPROPERTY(BlueprintReadWrite, Category=PakExportRuntime) float aperture = 0.f;
 };

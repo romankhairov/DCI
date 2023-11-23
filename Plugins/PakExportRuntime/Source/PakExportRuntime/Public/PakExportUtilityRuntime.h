@@ -3,171 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CommandsHelpers.h"
 #include "PakExportUtilityRuntime.generated.h"
 
 //JSON data structs
-UENUM()
-enum class EPakType : uint8
-{
-	PRODUCT,
-	MATERIAL,
-	LEVEL,
-	CAMERA
-};
-
-USTRUCT(BlueprintType)
-struct FMaterialInitialStateData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(BlueprintReadWrite) FString pak;
-	UPROPERTY(BlueprintReadWrite) FString slot;
-	UPROPERTY(BlueprintReadWrite) FString name;
-	UPROPERTY(BlueprintReadWrite) FString slot_name;
-};
-
-USTRUCT(BlueprintType)
-struct FInitialStateData
-{
-	GENERATED_BODY()
-public:
- 	UPROPERTY(BlueprintReadWrite) FString meshName;
-	UPROPERTY(BlueprintReadWrite) FTransform transform;
-	UPROPERTY(BlueprintReadWrite) TArray<FString> animations;
-	UPROPERTY(BlueprintReadWrite) TArray<FMaterialInitialStateData> materials;
-	UPROPERTY(BlueprintReadWrite) TArray<FString> slots;
-	UPROPERTY(BlueprintReadWrite) TArray<FString> morphs;
-};
-
-USTRUCT(BlueprintType)
-struct FPakPathData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(BlueprintReadWrite) FString pakFilePath;
-private:
-	UPROPERTY() FString name{"PakE"};
-	UPROPERTY() FString mountPath{ "../../../PakExport/Plugins/" };
-};
-
-USTRUCT(BlueprintType)
-struct FLevelPakPathData : public FPakPathData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(BlueprintReadWrite) FString assetName;
-};
-
-USTRUCT()
-struct FMaterialPakPathData : public FPakPathData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY() FString assetName;
-};
-
-USTRUCT(BlueprintType)
-struct FProductPakPathData : public FPakPathData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(BlueprintReadWrite) FInitialStateData initialState;
-};
-
-USTRUCT()
-struct FPakData
-{
-	GENERATED_BODY()
-public:
-	FPakData()
-	{
-		switch (FEngineVersion::Current().GetMajor())
-		{
-		case 4: unrealVersion = "V_4"; break;
-		case 5: unrealVersion = "V_5"; break;
-		default: break;
-		}
-	}
-	
-protected:
-	UPROPERTY() EPakType type = EPakType::PRODUCT;
-	UPROPERTY() FString unrealVersion{};
-};
-
-USTRUCT(BlueprintType)
-struct FLevelPakData : public FPakData
-{
-	GENERATED_BODY()
-public:
-	FLevelPakData()
-	{
-		type = EPakType::LEVEL;
-	}
-	UPROPERTY(BlueprintReadWrite) FString levelName;
-	UPROPERTY(BlueprintReadWrite) bool hideAllLevels = false;
-	UPROPERTY(BlueprintReadWrite) bool hideLastLevel = false;
-	UPROPERTY(BlueprintReadWrite) bool clickable = false;
-	UPROPERTY(BlueprintReadWrite) TArray<FString> levelsToHide;
-	UPROPERTY(BlueprintReadWrite) FVector location = FVector(0,0,0);
-	UPROPERTY(BlueprintReadWrite) FRotator rotation = FRotator(0,0,0);
-	UPROPERTY(BlueprintReadWrite) FString optionalLevelName;
-	UPROPERTY(BlueprintReadWrite) TArray<FString> levelType;
-	UPROPERTY(BlueprintReadWrite) FLevelPakPathData levelPak;
-	UPROPERTY(BlueprintReadWrite) TArray<FString> slots{};
-};
-
-USTRUCT()
-struct FMaterialPakData : public FPakData
-{
-	GENERATED_BODY()
-public:
-	FMaterialPakData()
-	{
-		type = EPakType::MATERIAL;
-	}
-	UPROPERTY() FString materialName;
-	UPROPERTY() FMaterialPakPathData materialPak;
-};
-
-USTRUCT(BlueprintType)
-struct FProductPakData : public FPakData
-{
-	GENERATED_BODY()
-public:
-	FProductPakData()
-	{
-		type = EPakType::PRODUCT;
-	}
-	UPROPERTY(BlueprintReadWrite) FString productName;
-	UPROPERTY(BlueprintReadWrite) FProductPakPathData meshPak;
-	UPROPERTY(BlueprintReadWrite) FPakPathData animationsPak;
-	UPROPERTY(BlueprintReadWrite) FPakPathData materialPak;
-};
-
-USTRUCT()
-struct FCommandData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY() FString command;
-	UPROPERTY() FString name;
-};
-
-USTRUCT()
-struct FLevelCommandData : public FCommandData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY() FLevelPakData payload;
-};
-
-USTRUCT()
-struct FProductCommandData : public FCommandData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY() FProductPakData payload;
-};
 
 USTRUCT()
 struct FHex
@@ -223,7 +62,7 @@ public:
 	UPROPERTY() FString id;
 	UPROPERTY() FString previewPath;
 	UPROPERTY() FMaterialPropertyData property;
-	UPROPERTY() EPakType type{EPakType::MATERIAL};
+	UPROPERTY() EAssetType type{EAssetType::MATERIAL};
 };
 
 USTRUCT()
@@ -232,31 +71,6 @@ struct FMaterialsData
 	GENERATED_BODY()
 public:
 	UPROPERTY() FMaterialsAssetData data;
-};
-
-USTRUCT(BlueprintType)
-struct FCameraData : public FPakData
-{
-	GENERATED_BODY()
-public:
-	FCameraData()
-	{
-		type = EPakType::CAMERA;
-	}
-	UPROPERTY(BlueprintReadWrite) FVector location = FVector(0,0,0);
-	UPROPERTY(BlueprintReadWrite) FRotator rotation = FRotator(0,0,0);
-	UPROPERTY(BlueprintReadWrite) FString object;
-	UPROPERTY(BlueprintReadWrite) float armLength = 0.f;
-	UPROPERTY(BlueprintReadWrite) float focalLength = 0.f;
-	UPROPERTY(BlueprintReadWrite) float aperture = 0.f;
-};
-
-USTRUCT()
-struct FCameraCommandData : public FCommandData
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY() FCameraData data;
 };
 
 USTRUCT(BlueprintType)
@@ -281,6 +95,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "PakExport")
 	static void GenerateJsonsForAssets(const TArray<FString>& InAssets, const FString& DestinationFile);
 
-	static FCameraData GenerateCameraData(AActor* CameraActor);
-	static void GenerateJsonsForAssets(const TArray<FAssetData>& InAssets, const FString& DestinationFile, bool MaterialsPakRequested = false, bool CamerasPakRequested = false);
+	static FApplyCameraPresetPayloadJson GenerateCameraData(AActor* CameraActor);
+	static void GenerateJsonsForAssets(const TArray<FAssetData>& InAssets, const FString& DestinationFile, bool MaterialsPakRequested = false, bool CamerasPakRequested = false, bool LevelSequencePakRequested = false);
 };
