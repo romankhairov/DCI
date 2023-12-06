@@ -10,7 +10,7 @@ cd "%UtilsDir%"
 "%UtilsDir%\7-Zip\x64\7zr.exe" x "%UtilsDir%\PakExport.7z" -o%UtilsDir%
 
 ::sync project settings
-echo F|XCOPY /S /Q /Y /F "%ParentFolderName%\..\..\Config\DefaultEngine.ini" "%UtilsDir%\PakExport\Config\DefaultEngine.ini"
+rem echo F|XCOPY /S /Q /Y /F "%ParentFolderName%\..\..\Config\DefaultEngine.ini" "%UtilsDir%\PakExport\Config\DefaultEngine.ini"
 
 exit /b
 
