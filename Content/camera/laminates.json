@@ -21,7 +21,7 @@
 				"payload": {
 					"clamps": {
 						"minYaw": -91.2,
-						"maxYaw": -38.6,
+						"maxYaw": -48.6,
 						"minPitch": -22.6,
 						"maxPitch": 22.2,
 						"minZoom": -100,
