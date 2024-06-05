@@ -75,6 +75,11 @@
 			"Name": "PakLoader",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/fb9820b9b5c24f8ba178b2a11a61063f"
+		},
+		{
+			"Name": "PakCreator",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/d89deab1d6e54d108ca0280f204eb1d9"
 		}
 	]
 }

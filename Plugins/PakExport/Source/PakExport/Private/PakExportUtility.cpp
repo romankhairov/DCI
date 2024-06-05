@@ -831,15 +831,34 @@ bool UPakExportUtility::CookPak(const FString& InDestinationFile/* = {}*/)
 	UPakExportUtilityRuntime::GenerateJsonsForAssets(SelectedAssets, DestinationFile, MaterialsPakRequested, CamerasPakRequested);
 
 	if (CamerasPakRequested) return true;
-
+	
+	const auto ContentFolder{ IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead(
+	*(FPaths::GameSourceDir() + "../Plugins/PakExport/Utils/PakExport/Plugins/PakE/Content/"))};
+	
 	//cook
 #if PLATFORM_WINDOWS
 	const auto Res = RunBat("CookAndPak.bat\" " + Quotes + EngineDir + Quotes
 	+ " " + Quotes + DestinationFile + Quotes
 	+ " " + "1>" + Quotes + DestinationDir + FString("/") + "CookAndPak.log" + Quotes + "2>&1");
+
+	if (Res)
+	{
+		RunBat("PakE2Game.bat\" " + Quotes + ContentFolder + Quotes);
+		
+		RunBat("Zip.bat\" " + Quotes + DestinationFile + Quotes + " " + Quotes + ContentFolder + Quotes);
+	}
+	
 	return Res;
 #elif PLATFORM_MAC
 	const auto Res = RunBat("CookAndPak.sh " + EngineDir  + " " + DestinationFile);
+
+	if (Res)
+	{
+		RunBat("PakE2Game.sh " + ContentFolder);
+		
+		RunBat("Zip.sh " + DestinationFile + " " + ContentFolder);
+	}
+	
 	return Res;
 #endif
 }

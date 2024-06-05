@@ -1,13 +1,11 @@
 @echo off
 
 setlocal
-set ThisDir=%~dp0
 
 for %%I in ("%~dp0.") do for %%J in ("%%~dpI.") do set ParentFolderName=%%~dpnxJ
 
 set UtilsDir=%ParentFolderName%\Utils
-set PakExportDir=%UtilsDir%\PakExport
-RMDIR /s /q "%PakExportDir%"
+call %ParentFolderName%\Scripts\Cleanup.bat
 cd "%UtilsDir%"
 "%UtilsDir%\7-Zip\x64\7zr.exe" x "%UtilsDir%\PakExport.7z" -o%UtilsDir%
 

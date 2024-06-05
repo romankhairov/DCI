@@ -17,7 +17,7 @@ echo UEDir=%UEDir%
 echo DestDir=%DestDir%
 
 ::fix root path
-"%UtilsDir%\fnr.exe" --cl --dir "%PakExportDir%\Plugins\PakE\Content" --fileMask "*.*" --includeSubDirectories --caseSensitive --KeepModifiedDate --skipBinaryFileDetection --alwaysUseEncoding "windows-1251" --find "Game" --replace "PakE"
+call "%~dp0\Game2PakE.bat" "%PakExportDir%\Plugins\PakE\Content"
 
 ::cook game
 call "%~dp0\CookGame.bat" "%UEDir%"

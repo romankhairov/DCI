@@ -14,9 +14,13 @@
 #include "Engine/SCS_Node.h"
 #include "PakLoaderLibrary.h"
 #include "PakExportRuntime.h"
+#include "Animation/SkeletalMeshActor.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/SkeletalMesh.h"
+#if ENGINE_MAJOR_VERSION > 4
 #include "Engine/SkinnedAssetCommon.h"
+#endif
+#include "Engine/StaticMeshActor.h"
 
 void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FString>& InAssets, const FString& DestinationFile)
 {
@@ -82,6 +86,25 @@ void UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 				LevelPakData.levelPak.pakFilePath = PakFilePath;
 				LevelPakData.levelPak.assetName = AssetName;
 
+				const auto World = Cast<UWorld>(Asset);
+				TArray<AActor*> Actors;
+				for (int32 LevelIndex = 0; LevelIndex < World->GetNumLevels(); LevelIndex++)
+					Actors.Append(World->GetLevel(LevelIndex)->Actors);
+				for (const auto Actor : Actors)
+				{
+					if (Actor->IsA<AStaticMeshActor>()
+						|| Actor->IsA<ASkeletalMeshActor>()
+						|| (((UObject*)Actor->GetClass())->IsA<UBlueprintGeneratedClass>()))
+					{
+						Actor->ForEachComponent<UMeshComponent, TFunction<void(UMeshComponent*)>>(false
+						, [&LevelPakData](const auto MeshComponent)
+						{
+							for (const auto& MaterialName : MeshComponent->GetMaterialSlotNames())
+								LevelPakData.slots.Add(MaterialName.ToString());
+						});
+					}
+				}
+				
 				FLevelCommandData LevelCommandData;
 				LevelCommandData.command = "loadLevel";
 				LevelCommandData.name = Name;

@@ -21,7 +21,7 @@ echo UEDir=$UEDir
 echo DestDir=$DestDir
 
 #fix root path
-for f in $(find "$PakExportDir/Plugins/PakE/Content" -name '*.uasset' -or -name '*.umap'); do perl -pi -e 's/\/Game./\/PakE\//s' $f; done
+$SCRIPTPATH/Game2PakE.sh $PakExportDir/Plugins/PakE/Content
 
 #cook game
 $SCRIPTPATH/CookGame.sh $UEDir
