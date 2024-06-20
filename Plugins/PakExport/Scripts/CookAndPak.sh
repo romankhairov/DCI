@@ -2,6 +2,14 @@
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
+UEDir=$1
+DestDir=$2
+Guid=$3
+
+echo UEDir=$UEDir
+echo DestDir=$DestDir
+echo Guid=$Guid
+
 mkdir -p $SCRIPTPATH/Logs
 
 exec 3>&1 4>&2
@@ -11,23 +19,30 @@ exec 1>$SCRIPTPATH/Logs/CookAndPak.out 2>&1
 UtilsDir="$SCRIPTPATH/../Utils"
 
 PakExportDir="$UtilsDir/PakExport"
-PakESavedDir="$PakExportDir/Plugins/PakE/Saved"
-SourcePakPath="$PakESavedDir/StagedBuilds/Mac/PakExport/Plugins/PakE/Content/Paks/Mac/PakEPakExport-Mac.pak"
+PakEDir="$PakExportDir/Plugins/${Guid}"
+PakESavedDir="$PakEDir/Saved"
+SourcePakPath="$PakESavedDir/StagedBuilds/Mac/PakExport/Plugins/${Guid}/Content/Paks/Mac/${Guid}PakExport-Mac.pak"
 
-UEDir=$1
-DestDir=$2
+UECmdDir=$UEDir/Binaries/Mac/UnrealEditor-Cmd
+ProjectFilePath="${PakExportDir}/PakExport.uproject"
 
-echo UEDir=$UEDir
-echo DestDir=$DestDir
+#Move assets
+"$UEDir/Build/BatchFiles/Mac/Build.sh" "PakExportEditor" Mac Development "$ProjectFilePath"
 
-#fix root path
-$SCRIPTPATH/Game2PakE.sh $PakExportDir/Plugins/PakE/Content
+while true
+do
+    result=$("$UECmdDir" "$ProjectFilePath" -IgnoreChangeList map=/Game/Minimal_Default.umap -UNATTENDED -RUNNINGUNATTENDEDSCRIPT -collision=True -Save -rebuild -nosourcecontrol -previewsurface=True -crashforuat -stdout -SkipSkinVerify -verbose=True -buildtexturestreaming -AllowCommandletRendering -rhithread -NOSCREENMESSAGES -run=MoveAssets -Guid=$3)
+
+    if [ $result = 0 ]; then
+        break
+    fi
+done
 
 #cook game
 $SCRIPTPATH/CookGame.sh $UEDir
 
 #cook PakE help plugin
-$SCRIPTPATH/CookPakE.sh $UEDir
+$SCRIPTPATH/CookPakE.sh $UEDir $Guid
 
 #copy pak to destination dir
 #mkdir -p "$d"

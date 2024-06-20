@@ -13,6 +13,7 @@ PakExportProjectFile="$SCRIPTPATH/../Utils/PakExport/PakExport.uproject"
 UEDir=$1
 UECmdDir=$UEDir/Binaries/Mac/UnrealEditor-Cmd
 UEUATDir=$UEDir/Build/BatchFiles/RunUAT.sh
+Guid=$2
 
 #cook pake
-"$UEUATDir" -ScriptsForProject="$PakExportProjectFile" BuildCookRun -project="$PakExportProjectFile" -noP4 -clientconfig=Shipping -serverconfig=Shipping -unrealexe="$UECmdDir" -utf8output -platform=Mac -targetplatform=Mac -build -cook -map= -unversionedcookedcontent -pak -dlcname=PakE -DLCIncludeEngineContent -basedonreleaseversion=1.0 -stagebasereleasepaks -stage -compressed -installed
+"$UEUATDir" -ScriptsForProject="$PakExportProjectFile" BuildCookRun -project="$PakExportProjectFile" -noP4 -clientconfig=Shipping -serverconfig=Shipping -unrealexe="$UECmdDir" -utf8output -platform=Mac -targetplatform=Mac -build -cook -map= -unversionedcookedcontent -pak -dlcname=${Guid} -DLCIncludeEngineContent -basedonreleaseversion=1.0 -stagebasereleasepaks -stage -compressed -nocompile -nocompileeditor -installed
