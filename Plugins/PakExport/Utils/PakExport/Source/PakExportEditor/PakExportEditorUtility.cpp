@@ -9,6 +9,7 @@
 #include "Misc/ScopedSlowTask.h"
 #include "Internationalization/Internationalization.h"
 #endif
+#include "PackageTools.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 
 #if ENGINE_MAJOR_VERSION > 4
@@ -17,27 +18,10 @@
 
 int32 UPakExportEditorUtility::MoveAssets(const FString& Guid)
 {
-	const auto AllPackages{GetAllPackages()};
-
-	for (const auto& Package : AllPackages)
-	{
-		TArray<FString> Array;
-		Package.ParseIntoArray(Array, TEXT("/"));
-		Array.RemoveAt(Array.Num() - 1);
-		FString TmpPackage{"/"};
-		for (const auto& Item : Array) TmpPackage += Item + "/";
-		TmpPackage += FGuid::NewGuid().ToString(EGuidFormats::Base36Encoded);
-		
-		UEditorAssetLibrary::RenameAsset(Package, TmpPackage);
-		FixUpRedirectors();
-		UEditorAssetLibrary::RenameAsset(TmpPackage, Package);
-		FixUpRedirectors();
-	}
-	
 	TArray<FString> Folders;
 	TArray<FString> Files;
 	
-	for (const auto& Package : AllPackages)
+	for (const auto& Package : GetAllPackages())
 	{
 		TArray<FString> Array;
 		Package.ParseIntoArray(Array, TEXT("/"));
@@ -60,6 +44,11 @@ int32 UPakExportEditorUtility::MoveAssets(const FString& Guid)
 	{
 		const auto& Folder{Folders[0]};
 		const auto SourceFolder{"/Game/" + Folder};
+
+		TArray<UPackage*> PackagesToReload;
+		for (const auto& Package : GetAllPackages(Folder))
+			PackagesToReload.Add(UEditorAssetLibrary::LoadAsset(Package)->GetPackage());
+		UPackageTools::ReloadPackages(PackagesToReload);
 		
 		UEditorAssetLibrary::RenameDirectory(SourceFolder, "/" + Guid + "/" + Folder);
 
@@ -70,8 +59,11 @@ int32 UPakExportEditorUtility::MoveAssets(const FString& Guid)
 	else if (Files.Num() > 0)
 	{
 		const auto File{Files[0]};
+		const auto SourceFile{"/Game/" + File};
 
-		UEditorAssetLibrary::RenameAsset("/Game/" + File, "/" + Guid + "/" + File);
+		UPackageTools::ReloadPackages({UEditorAssetLibrary::LoadAsset(SourceFile)->GetPackage()});
+
+		UEditorAssetLibrary::RenameAsset(SourceFile, "/" + Guid + "/" + File);
 
 		FixUpRedirectors();
 	}
@@ -79,11 +71,11 @@ int32 UPakExportEditorUtility::MoveAssets(const FString& Guid)
 	return 1;
 }
 
-TArray<FString> UPakExportEditorUtility::GetAllPackages()
+TArray<FString> UPakExportEditorUtility::GetAllPackages(const FString& Folder/* = {}*/)
 {
 	TArray<FString> Packages;
 
-	auto AllAssets{UEditorAssetLibrary::ListAssets("/Game/")};
+	auto AllAssets{UEditorAssetLibrary::ListAssets("/Game/" + Folder)};
 
 	for (const auto& Asset : AllAssets)
 	{

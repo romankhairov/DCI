@@ -18,6 +18,6 @@ public:
 	static int32 MoveAssets(const FString& Guid);
 
 private:
-	static TArray<FString> GetAllPackages();
+	static TArray<FString> GetAllPackages(const FString& Folder = {});
 	static void FixUpRedirectors(const TArray<FString>& SelectedPaths = {"/Game"});
 };

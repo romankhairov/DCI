@@ -14,7 +14,8 @@ public class PakExportEditor : ModuleRules
 			"Engine",
 			"InputCore",
 			"EditorScriptingUtilities",
-			"AssetTools"
+			"AssetTools",
+			"UnrealEd"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
