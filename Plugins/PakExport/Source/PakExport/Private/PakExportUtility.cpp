@@ -24,7 +24,6 @@
 #include "Engine/StaticMesh.h"
 #include "Templates/SharedPointer.h"
 #include "EditorAssetLibrary.h"
-#include "EditorStaticMeshLibrary.h"
 #include "Engine/Blueprint.h"
 #include "Serialization/MemoryWriter.h"
 #include "UObject/UObjectGlobals.h"
@@ -33,8 +32,6 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/SkeletalMesh.h"
 #include "Engine/BlueprintGeneratedClass.h"
-#include "Engine/SimpleConstructionScript.h"
-#include "Engine/SCS_Node.h"
 #include "Animation/AnimSequence.h"
 #include "Animation/MorphTarget.h"
 #include "Components/SkinnedMeshComponent.h"
@@ -55,7 +52,6 @@
 #include "StaticMeshAttributes.h"
 #include "MeshOpsActor.h"
 #include "KismetProceduralMeshLibrary.h"
-#include "Animation/SkeletalMeshActor.h"
 #include "HAL/FileManagerGeneric.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Misc/FileHelper.h"
@@ -731,7 +727,6 @@ bool UPakExportUtility::MigratePackages(const TArray<FAssetData>& InAssets/* = {
 #endif
 	//return false;
 	
-	if (!NoCollision) EnableSimpleCollisions(l_SelectedAssets);
 	SelectedAssets.Append(l_SelectedAssets);
 	TArray<FName> PackageNames;
 	PackageNames.Reserve(l_SelectedAssets.Num());
@@ -765,17 +760,6 @@ bool UPakExportUtility::MigratePackages(const TArray<FAssetData>& InAssets/* = {
 				Path.Split("/", &OriginalRootString, &Path, ESearchCase::IgnoreCase, ESearchDir::FromStart);
 				OriginalRootString = TEXT("/") + OriginalRootString;
 				RecursiveGetDependencies(PackageName, AllPackageNamesToMove, PackageNamesToMove, OriginalRootString);
-			}
-
-			if (!NoCollision && l_SelectedAssets[&PackageName - &PackageNames[0]].GetAsset()->IsA(UBlueprint::StaticClass()))
-			{
-				const auto& AssetRegistryModule = (FModuleManager::Get().LoadModuleChecked<FAssetRegistryModule>(TEXT("AssetRegistry"))).Get();
-				for (const auto& PackageNameToMove : PackageNamesToMove)
-				{
-					TArray<FAssetData> Assets;
-					if (AssetRegistryModule.GetAssetsByPackageName(PackageNameToMove, Assets))
-						EnableSimpleCollisions(Assets);
-				}
 			}
 		}
 	}
@@ -1052,6 +1036,7 @@ bool UPakExportUtility::CookPak(const FString& Guid, const FString& InDestinatio
 		+ Quotes + EngineDir + Quotes+ " "
 		+ Quotes + FinalDestinationFile + Quotes+ " "
 		+ Quotes + Guid + Quotes + " "
+		+ Quotes + (NoCollision ? "false" : "true") + Quotes + " "
 		+ "1>" + Quotes + DestinationDir + FString("/") + "CookAndPak.log" + Quotes + "2>&1");
 
 	if (Res)
@@ -1063,7 +1048,7 @@ bool UPakExportUtility::CookPak(const FString& Guid, const FString& InDestinatio
 	
 	return Res;
 #elif PLATFORM_MAC
-	const auto Res = RunBat("CookAndPak.sh " + EngineDir  + " " + FinalDestinationFile + " " + Guid);
+	const auto Res = RunBat("CookAndPak.sh " + EngineDir  + " " + FinalDestinationFile + " " + Guid + " " + (NoCollision ? "false" : "true"));
 
 	if (Res)
 	{
@@ -1105,30 +1090,6 @@ bool UPakExportUtility::RunBat(const FString& BatFileAndParams)
 		return false;
 	}
 #endif
-}
-
-void UPakExportUtility::EnableSimpleCollisions(const TArray<FAssetData>& Assets)
-{
-	for (auto const& SelectedAsset : Assets)
-	{
-		const auto AssetName = SelectedAsset.GetFullName();
-		if (!SimpleCollisionCreatedAssets.Contains(AssetName))
-			if (auto StaticMesh = Cast<UStaticMesh>(SelectedAsset.GetAsset()))
-			{
-				SaveAssetCopy(SelectedAsset);
-				
-				SimpleCollisionCreatedAssets.Add(AssetName);
-				if (!StaticMesh->GetBodySetup()) StaticMesh->CreateBodySetup();
-				StaticMesh->GetBodySetup()->CollisionTraceFlag = CTF_UseSimpleAndComplex;
-				StaticMesh->Build();
-#if ENGINE_MAJOR_VERSION >= 5
-				GEditor->GetEditorSubsystem<UStaticMeshEditorSubsystem>()->SetConvexDecompositionCollisions(StaticMesh, 16, 16, 100000);
-#else
-				UEditorStaticMeshLibrary::SetConvexDecompositionCollisions(StaticMesh, 16, 16, 100000);
-#endif
-				UEditorAssetLibrary::SaveLoadedAsset(StaticMesh, false);
-			}
-	}
 }
 
 void UPakExportUtility::RecursiveGetDependencies(const FName& PackageName, TSet<FName>& AllDependencies, TSet<FName>& Dependencies, const FString& OriginalRoot)

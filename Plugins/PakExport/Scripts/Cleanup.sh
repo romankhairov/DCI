@@ -2,5 +2,10 @@
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-rm -rf "$SCRIPTPATH/../Utils/PakExport/Plugins"
-rm -rf "$SCRIPTPATH/../Utils/PakExport/Content"
+UtilsDir="$SCRIPTPATH/../Utils"
+PakExportDir="$UtilsDir/PakExport"
+
+rm -rf "$PakExportDir/Plugins"
+rm -rf "$PakExportDir/Content"
+
+"$UtilsDir/7-Zip-Mac/7zz" x "$PakExportDir/PakExport.7z" -o"$PakExportDir" -y

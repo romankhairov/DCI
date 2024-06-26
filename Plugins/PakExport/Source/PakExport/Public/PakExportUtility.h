@@ -59,7 +59,6 @@ private:
 	static void MigratePackages_ReportConfirmed(TSharedPtr<TArray<ReportPackageData>> PackageDataToMigrate);
 	static bool CookPak(const FString& Guid, const FString& DestinationFile, const FString& CustomFileName = {}, bool WithSources = true);
 	static bool RunBat(const FString& BatFileAndParams);
-	static void EnableSimpleCollisions(const TArray<FAssetData>& Assets);
 	static void RecursiveGetDependencies(const FName& PackageName, TSet<FName>& AllDependencies, TSet<FName>& Dependencies, const FString& OriginalRoot);
 	static UStaticMesh* ConvertMeshesToStaticMesh(const TArray<UMeshComponent*>& InMeshComponents, const FTransform& InRootTransform, const FString& InPackageName);
 	static void ConvertActorsToStaticMesh(const TArray<AActor*> InActors, FString DestinationPakageName);

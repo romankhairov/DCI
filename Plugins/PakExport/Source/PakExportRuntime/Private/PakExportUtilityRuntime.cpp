@@ -152,24 +152,28 @@ bool UPakExportUtilityRuntime::GenerateJsonsForAssets(const TArray<FAssetData>& 
 					EnvironmentExportData.assetPath = AssetName;
 
 					const auto World = Cast<UWorld>(Asset);
-					TArray<AActor*> Actors;
 					for (int32 LevelIndex = 0; LevelIndex < World->GetNumLevels(); LevelIndex++)
-						Actors.Append(World->GetLevel(LevelIndex)->Actors);
-					for (const auto Actor : Actors)
 					{
-						if (Actor->IsA<AStaticMeshActor>()
+						const auto& Actors{World->GetLevel(LevelIndex)->Actors};
+						for (const auto& Actor : Actors)
+						{
+							if (Actor->IsA<AStaticMeshActor>()
 							|| Actor->IsA<ASkeletalMeshActor>()
 							|| (((UObject*)Actor->GetClass())->IsA<UBlueprintGeneratedClass>()))
-						{
-							Actor->ForEachComponent<UMeshComponent, TFunction<void(UMeshComponent*)>>(false
-								, [&EnvironmentExportData, Actor](const auto MeshComponent)
-								{
-									for (const auto& MaterialName : MeshComponent->GetMaterialSlotNames())
-										EnvironmentExportData.slots.Add(
-											UKismetSystemLibrary::GetDisplayName(Actor) + SlotDelimiter +
-											UKismetSystemLibrary::GetDisplayName(MeshComponent) + SlotDelimiter +
-											MaterialName.ToString());
-								});
+							{
+								const auto ActorCounter{&Actor - &Actors[0]};
+								Actor->ForEachComponent<UMeshComponent, TFunction<void(UMeshComponent*)>>(false
+									, [&EnvironmentExportData, Actor, LevelIndex, ActorCounter](const auto MeshComponent)
+									{
+										//Levels slot names generation
+										//Should be same as in PakExport project UPakExportEditorUtility::LevelsActorsUnification function
+										for (const auto& MaterialName : MeshComponent->GetMaterialSlotNames())
+											EnvironmentExportData.slots.Add(
+												UKismetSystemLibrary::GetDisplayName(Actor) + FString::FromInt(LevelIndex) + FString::FromInt(ActorCounter) + SlotDelimiter +
+												UKismetSystemLibrary::GetDisplayName(MeshComponent) + SlotDelimiter +
+												MaterialName.ToString());
+									});
+							}
 						}
 					}
 
