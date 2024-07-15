@@ -1,3 +1,5 @@
+:: Copyright 2024 3D Source, Inc. All Rights Reserved.
+
 @echo off
 
 set ThisDir=%~dp0

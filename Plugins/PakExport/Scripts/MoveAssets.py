@@ -1,4 +1,4 @@
-# 
+# Copyright 2024 3D Source, Inc. All Rights Reserved.
 
 import unreal
 import argparse
