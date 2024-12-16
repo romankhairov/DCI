@@ -64,16 +64,16 @@
 			"Enabled": true
 		},
 		{
-			"Name": "PakExportRuntime",
-			"Enabled": true
-		},
-		{
 			"Name": "PakExport",
 			"Enabled": true
 		},
 		{
+			"Name": "PakExportRuntime",
+			"Enabled": false
+		},
+		{
 			"Name": "PakLoader",
-			"Enabled": true,
+			"Enabled": false,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/fb9820b9b5c24f8ba178b2a11a61063f"
 		}
 	]

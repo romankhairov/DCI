@@ -1,0 +1,18 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{63D2F289-F945-E2D1-3506-5BA6E30EF568}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "PakExport",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "PakExportEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}

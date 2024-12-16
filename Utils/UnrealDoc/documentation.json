@@ -1,0 +1,773 @@
+{
+  "enums": [],
+  "classes": [],
+  "structs": [
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FCommandJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "command",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "determines which command to execute"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Base class for all commands"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FInitialStateJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "materials",
+          "value_type": "TArray<FMaterialJson>",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "list of materials applying to product"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "meshName",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"Aromat_red\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Name of the asset relative to Content folder in project"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "transform",
+          "value_type": "FTransformJson",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Product spawn transform"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Mesh initial state"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FMaterialJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "colorHex",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"colorHex\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "color in hex format like FF0000 of #FF0000"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "colorParameterName",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"color_picker\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "vector parameter color applying to"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "name",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"mat/paper/back\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Name of the asset relative to Content folder in project"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "pak",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"PakE\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Name of the asset root folder(almost always like this)"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "scalars",
+          "value_type": "TArray<FScalarJson>",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "List of scalars in the material"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "slot_name",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"back\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Material name applying material to"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "textures",
+          "value_type": "TArray<FTextureJson>",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "List of textures in the material"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Material"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FMeshPakJson",
+      "inherits": [
+        [
+          "Public",
+          "FPakJson"
+        ]
+      ],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "initialState",
+          "value_type": "FInitialStateJson",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Mesh initial state"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Mesh pak file"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FPakJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "mountPath",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"../../../PakExport/Plugins/\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Name of the pak export plugin (almost always like this)"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "name",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"PakE\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Name of the asset root folder(almost always like this)"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "pakFilePath",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"vps5_paks/Aromat_red.pak\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "relative path to pak file"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "usd_path",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"vps5_paks/Aromat_red.usd\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "path to usd/usdz file overrides pak file"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Object describes path to pak/use file"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FRotatorJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "Pitch",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Rotation around the right axis (around Y axis), Looking up and down (0=Straight Ahead, +Up, -Down)"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "Roll",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Rotation around the forward axis (around X axis), Tilting your head, 0=Straight, +Clockwise, -CCW."
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "Yaw",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Rotation around the up axis (around Z axis), Running in circles 0=East, +North, -South."
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Implements a container for rotation information.\nAll rotation values are stored in degrees."
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FScalarJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "parameterName",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"print_switch\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "scalar parameter name in material"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": [
+              {
+                "Pair": {
+                  "key": "ClampMin",
+                  "value": "0.0"
+                }
+              },
+              {
+                "Pair": {
+                  "key": "ClampMax",
+                  "value": "1.0"
+                }
+              }
+            ]
+          },
+          "name": "value",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "1.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "value of the scalar material parameter"
+        }
+      ],
+      "methods": [],
+      "doc_comments": null
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FSelectProductJson",
+      "inherits": [
+        [
+          "Public",
+          "FCommandJson"
+        ]
+      ],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "payload",
+          "value_type": "FSelectProductPayloadJson",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Select product command payload"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Load and spawn product in the world"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FSelectProductPayloadJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "materialPak",
+          "value_type": "FPakJson",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Material pak file"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "meshPak",
+          "value_type": "FMeshPakJson",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Mesh pak file"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "productName",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Global(static) product ID in scene (not per instance)"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Select product command payload"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FTextureJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "Rotate",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "rotate angle in degrees"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "canvas",
+          "value_type": "bool",
+          "array": "None",
+          "default_value": "true",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "enable canvas for texture or no"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "coordinatePosition",
+          "value_type": "FVector2D",
+          "array": "None",
+          "default_value": "{0, 0}",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "grid position"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "coordinateSize",
+          "value_type": "FVector2D",
+          "array": "None",
+          "default_value": "{1, 1}",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "grid size"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "parameterName",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"print\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "parameter for texture in material"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "pivot",
+          "value_type": "FVector2D",
+          "array": "None",
+          "default_value": "{0.5, 0.5}",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "pivot of the texture in relative space"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "position",
+          "value_type": "FVector2D",
+          "array": "None",
+          "default_value": "{0.5, 0.5}",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "position of the texture in relative space"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "size",
+          "value_type": "FVector2D",
+          "array": "None",
+          "default_value": "{1024, 1024}",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "size of the texture"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "url",
+          "value_type": "FString",
+          "array": "None",
+          "default_value": "\"https://i.ibb.co/tsjtsDf/Pngtree-duck-202201.png\"",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "url to download texture from"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Material texture"
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FTransformJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "Scale3D",
+          "value_type": "FVectorJson",
+          "array": "None",
+          "default_value": "FVectorJson(1.0f, 1.0f, 1.0f)",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "3D scale (always applied in local space) as a vector"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "rotation",
+          "value_type": "FRotatorJson",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Rotation of this transformation, as a rotator"
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "translation",
+          "value_type": "FVectorJson",
+          "array": "None",
+          "default_value": null,
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Translation of this transformation, as a vector"
+        }
+      ],
+      "methods": [],
+      "doc_comments": "Transform composed of Scale, Rotation (as a rotator), and Translation."
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FVector2DJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "x",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Vector's X component."
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "y",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Vector's Y component."
+        }
+      ],
+      "methods": [],
+      "doc_comments": "A vector in 2-D space composed of components (X, Y) with floating point precision."
+    },
+    {
+      "specifiers": {
+        "attributes": [],
+        "meta": []
+      },
+      "api": null,
+      "mode": "Struct",
+      "name": "FVectorJson",
+      "inherits": [],
+      "template": null,
+      "properties": [
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "x",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Vector's X component."
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "y",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Vector's Y component."
+        },
+        {
+          "specifiers": {
+            "attributes": [],
+            "meta": []
+          },
+          "name": "z",
+          "value_type": "float",
+          "array": "None",
+          "default_value": "0.0f",
+          "visibility": "Public",
+          "is_static": false,
+          "doc_comments": "Vector's Z component."
+        }
+      ],
+      "methods": [],
+      "doc_comments": "A vector in 3-D space composed of components (X, Y, Z) with floating point precision."
+    }
+  ],
+  "functions": [],
+  "book": {},
+  "snippets": {}
+}

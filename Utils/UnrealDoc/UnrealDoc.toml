@@ -1,0 +1,5 @@
+input_dirs = [
+	"c:/Data/vps-unreal/Plugins/PakExportRuntime/Source/PakExportRuntime/Public/CommandsHelpers.h",
+	"c:/Data/vps-unreal/Plugins/PakExportRuntime/Source/PakExportRuntime/Public/Commands.h"
+	]
+output_dir = "./"
