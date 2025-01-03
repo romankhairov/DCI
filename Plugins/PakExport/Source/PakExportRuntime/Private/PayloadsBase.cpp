@@ -1,5 +1,3 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
-
 #include "PayloadsBase.h"
 
 // ----------------------- VARIABLES JSON --------------------------------

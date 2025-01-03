@@ -1,9 +1,6 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
+// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
 
 #include "PakExportRuntime.h"
-#include "CoreMinimal.h"
-#include "Modules/ModuleManager.h"
-
 
 DEFINE_LOG_CATEGORY(LogPakExportRuntime);
 

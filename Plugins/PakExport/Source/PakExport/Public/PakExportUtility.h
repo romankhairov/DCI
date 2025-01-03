@@ -1,4 +1,4 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -77,7 +77,7 @@ class UPakExportDeveloperSettings : public UDeveloperSettings
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(config, EditAnywhere, Category = "PakExport") TSoftClassPtr<AMeshOpsActor> MeshOpsActorClass;
+	UPROPERTY(config, EditAnywhere) TSoftClassPtr<AMeshOpsActor> MeshOpsActorClass;
 
 	static UClass* GetMeshOpsActorClass();
 };

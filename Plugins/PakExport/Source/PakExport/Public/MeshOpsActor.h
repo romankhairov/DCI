@@ -1,4 +1,4 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -27,20 +27,20 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintImplementableEvent, Category = "PakExport") void ConstructionScript();
+	UFUNCTION(BlueprintImplementableEvent) void ConstructionScript();
 
-	UFUNCTION(BlueprintCallable, Category = "PakExport") void AssignCutters(const TArray<UStaticMeshComponent*>& InCutters)
+	UFUNCTION(BlueprintCallable) void AssignCutters(const TArray<UStaticMeshComponent*>& InCutters)
 	{
 		Cutters = InCutters;
 	}
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "PakExport")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UProceduralMeshComponent* ProceduralMeshComponent = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), Category = "PakExport")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* StaticMeshComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly, Category = "PakExport")
+	UPROPERTY(BlueprintReadOnly)
 	TArray<UStaticMeshComponent*> Cutters;
 
 };

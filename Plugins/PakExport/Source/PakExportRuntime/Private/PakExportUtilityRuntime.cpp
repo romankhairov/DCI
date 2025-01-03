@@ -1,8 +1,7 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PakExportUtilityRuntime.h"
-#include "Runtime/Launch/Resources/Version.h"
 #include "Serialization/ObjectAndNameAsStringProxyArchive.h"
 #include "CineCameraComponent.h"
 #include "PublicCineCameraComponent.h"
@@ -24,14 +23,6 @@
 #include "Engine/StaticMeshActor.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "IPlatformFilePak.h"
-#include "Misc/Filehelper.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "Animation/AnimSequence.h"
-#include "UObject/Package.h"
-#include "AssetRegistry/AssetData.h"
-#include "Materials/MaterialInterface.h"
-#include "Engine/Level.h"
-#include "Misc/Base64.h"
 
 constexpr auto SlotDelimiter{"::"};
 

@@ -1,5 +1,3 @@
-# Copyright 2024 3D Source, Inc. All Rights Reserved.
-
 #!/bin/bash
 
 DestName=$1

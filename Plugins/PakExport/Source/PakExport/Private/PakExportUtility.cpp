@@ -1,4 +1,4 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PakExportUtility.h"
@@ -55,10 +55,6 @@
 #include "HAL/FileManagerGeneric.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Misc/FileHelper.h"
-#include "Engine/SkeletalMesh.h"
-#include "PhysicsEngine/BodySetup.h"
-#include "Engine/SkinnedAssetCommon.h"
-#include "MaterialDomain.h"
 
 #if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 3
 #include "Engine/SkinnedAssetCommon.h"

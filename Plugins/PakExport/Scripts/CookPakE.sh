@@ -1,5 +1,3 @@
-# Copyright 2024 3D Source, Inc. All Rights Reserved.
-
 #!/bin/bash
 
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"

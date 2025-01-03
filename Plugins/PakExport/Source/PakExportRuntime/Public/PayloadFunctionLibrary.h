@@ -1,11 +1,10 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "PayloadsBase.h"
-#include "Dom/JsonObject.h"
 #include "PayloadFunctionLibrary.generated.h"
 
 

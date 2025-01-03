@@ -1,11 +1,9 @@
-// Copyright 2024 3D Source, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "PayloadsBase.h"
-#include "Misc/EngineVersion.h"
-#include "Misc/PackageName.h"
 #include "PakExportUtilityRuntime.generated.h"
 
 //JSON data structs
@@ -84,8 +82,8 @@ struct FMorphTargetData
 public:
 	FMorphTargetData() {}
 	FMorphTargetData(FName Name, float Value) : Name(Name), Value(Value) {}
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PakExport") FName	Name;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PakExport") float Value{};
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FName	Name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float Value{};
 };
 
 USTRUCT()
@@ -164,7 +162,7 @@ class PAKEXPORTRUNTIME_API UPakExportUtilityRuntime : public UObject
 {
 	GENERATED_BODY()
 public:
-	UFUNCTION(BlueprintPure, Category = "PakExport") static FString GetSlotDelimiter();
+	UFUNCTION(BlueprintPure) static FString GetSlotDelimiter();
 
 	UFUNCTION(BlueprintCallable, Category = "PakExport")
 	static void GenerateJsonsForAssets(const FString& Guid, const TArray<FString>& InAssets, const FString& DestinationFile, FString& OutJsonString);
